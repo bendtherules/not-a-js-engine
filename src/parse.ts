@@ -1,5 +1,5 @@
 import { parse } from 'acorn';
 
-export function parseScript(content: string) {
+export function ParseScript(content: string) {
   return parse(content);
 }
