@@ -29,3 +29,13 @@ export class CompletionRecord implements TCompletionRecord {
 export function NormalCompletion(value?: TValue) {
   return new CompletionRecord('normal', value);
 }
+
+export function v(cr: CompletionRecord): LanguageType | undefined {
+  if (cr[TypeString] === 'normal') {
+    return cr[ValueString];
+  }
+  // TODO: Else, from call site, return same value
+  return undefined;
+}
+
+export class AbruptCompletion extends TypeError {}

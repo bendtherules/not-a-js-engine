@@ -6,6 +6,7 @@ import {
   NumericLiteral,
   StringLiteral,
   Program,
+  BinaryExpression,
 } from './types';
 
 export function isProgram(node: Node): node is Program {
@@ -26,4 +27,8 @@ export function isNumericLiteral(node: Node): node is NumericLiteral {
 
 export function isStringLiteral(node: Node): node is StringLiteral {
   return isLiteral(node) && typeof node.value === 'string';
+}
+
+export function isBinaryExpression(node: Node): node is BinaryExpression {
+  return node.type === TypeStrings.BinaryExpression;
 }

@@ -6,6 +6,7 @@ export enum TypeStrings {
   Program = 'Program',
   ExpressionStatement = 'ExpressionStatement',
   Literal = 'Literal',
+  BinaryExpression = 'BinaryExpression',
 }
 
 export interface Program extends Node {
@@ -18,7 +19,8 @@ export interface ExpressionStatement extends Node {
   expression: Expression;
 }
 
-export type Expression = Literal | Node;
+// TODO: Add more possible type of expressions here and remove generic node
+export type Expression = Literal | BinaryExpression | Node;
 
 export interface Literal extends Node {
   type: TypeStrings.Literal;
@@ -33,4 +35,12 @@ export interface NumericLiteral extends Node {
 export interface StringLiteral extends Node {
   type: TypeStrings.Literal;
   value: string;
+}
+
+export interface BinaryExpression extends Node {
+  type: TypeStrings.BinaryExpression;
+  left: Literal;
+  right: Literal;
+  // TODO: Add actual possible operators here
+  operator: string;
 }

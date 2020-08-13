@@ -22,4 +22,28 @@ describe('evaluate literals', () => {
     expect(returnVal).toBeInstanceOf(CompletionRecord);
     expect(returnVal[ValueString]?.value).toBe('abc');
   });
+
+  it('for 10+20', () => {
+    const node = ParseScript(`10 + 20`);
+    const returnVal = Evaluate(node);
+
+    expect(returnVal).toBeInstanceOf(CompletionRecord);
+    expect(returnVal[ValueString]?.value).toBe(30);
+  });
+
+  it('for 10+20+30', () => {
+    const node = ParseScript(`10 + 20 + 30`);
+    const returnVal = Evaluate(node);
+
+    expect(returnVal).toBeInstanceOf(CompletionRecord);
+    expect(returnVal[ValueString]?.value).toBe(60);
+  });
+
+  it('for "ab"+"cd"', () => {
+    const node = ParseScript(`"ab"+"cd"`);
+    const returnVal = Evaluate(node);
+
+    expect(returnVal).toBeInstanceOf(CompletionRecord);
+    expect(returnVal[ValueString]?.value).toBe('abcd');
+  });
 });
