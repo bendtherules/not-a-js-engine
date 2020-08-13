@@ -18,15 +18,20 @@ import { throwUnknownNode } from './throwUnknownNode';
 
 export function Evaluate(node: Node): CompletionRecord {
   if (isProgram(node)) {
+    // Handle root program node
     const completions = node.body.map(tmp => Evaluate(tmp));
     return completions[completions.length - 1];
   } else if (isExpressionStatement(node)) {
+    // Handle ExpressionStatement
     return Evaluate(node.expression);
   } else if (isNumericLiteral(node)) {
+    // Handle NumberLiteral
     return NormalCompletion(new NumberValue(node.value));
   } else if (isStringLiteral(node)) {
+    // Handle StringLiteral
     return NormalCompletion(new StringValue(node.value));
   } else {
+    // If not handled, throw error
     throwUnknownNode(node);
   }
 
